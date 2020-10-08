@@ -30,6 +30,9 @@ public class PromedioArchivoCSV {
           acumulados del promedio */
          float sum = 0;
          int nest = 0;
+         int i =0;
+         float n[] = new float[cantNot+2];
+         float nt[]= new float[cantNot+2];
          /* En este while leeremos linea por linea el archivo */
          while((line = br.readLine()) != null) {
              float num = 0;
@@ -37,8 +40,9 @@ public class PromedioArchivoCSV {
              /* Ahora leeremos la primera columna que contiene notas, que 
               es la 2, y leeremos hasta la columna +1 de la cantidad de notas
               que el usuario indicó */
-             for(int i = 2; i<=cantNot+1 ;i++) {
+             for(i=2; i<=cantNot+1 ;i++) {
                  num += Float.parseFloat(tempArr[i]);
+                 n[i] += Float.parseFloat(tempArr[i]);
                 }
              /* Haremos operaciones para el promedio individual y lo imprimimos,
              y acumuladores para el promedio total */
@@ -47,11 +51,13 @@ public class PromedioArchivoCSV {
              System.out.println("Promedio del estudiante "+nest+": "+prom);       
              sum += prom;                           
             }
+         System.out.println();
+         for(i=2; i<=cantNot+1 ;i++) {
+             nt[i]=n[i]/nest;
+             System.out.println("El promedio de la nota " +(i-1)+ " es: "+nt[i]); 
+             
+            }
          /* Haremos operaciones para el promedio total y lo imprimimos */
-         float promT = sum / nest ;  
-         System.out.println();
-         System.out.println("El promedio total del salón es: "+promT); 
-         System.out.println();
          br.close();
         }
          catch(IOException ioe) {
